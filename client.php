@@ -54,6 +54,17 @@ function returnTotal(){
 }
 </script>
 
+<style>
+
+#table{
+	opacity:0.0;
+}
+#displayTotal{
+	display:none;
+}
+
+</style>
+
 <html>
 <head>
 	<title>Color Votes</title>
@@ -63,15 +74,55 @@ function returnTotal(){
 
 </head>
 <body class="bg-info">
-	<center> <h1 >Colors</h1> </center>
+	<div id="header">
+		<center> <h1>Colors</h1> </center>
+	</div>
 	<br>	
+	<div id="table">
 	<?php echo displayColors(); ?>
-	
+	</div>
 	<br>
 	<center>
-	<button class="btn btn-primary" onclick="javascript:returnTotal()"> Total </button> 
+	<button id="total" class="btn btn-primary" onclick="javascript:returnTotal()"> Total </button> <button id="show" class="btn btn-primary" > toggle </button>
 	<br><br>
-	<div id=displayTotal>Total Votes: </div>
+	<div id="displayTotal">Total Votes: </div>
 	</center>
-	
+
 </body>
+<script src ="bower_components/jquery/dist/jquery.js"></script>		
+<script>
+	$(document).ready(function(){
+		$("#show").click(function(){
+			if($("#table").css("opacity") == 0.0){
+				$("#table").css("opacity","1.0").hide();
+				$("#table").fadeIn("slow");
+			} else {
+				$("#table").fadeOut("slow",function(){
+					$("#table").show().css("opacity","0.0");
+				});
+				
+			}
+		});
+		
+		$("#total").mouseenter(function(){
+			$("#displayTotal").fadeIn("fast");
+		});
+		$("#total").mouseleave(function(){
+			$('#displayTotal').fadeOut("fast");
+		});	
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
